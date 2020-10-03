@@ -22,7 +22,6 @@ function showClicker() {
 
 function start() {
     const targetValue = new Date(refs.input.value);
-
     setInterval(() => {
         const currentTime = Date.now();
 
