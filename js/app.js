@@ -10,9 +10,11 @@ refs = {
     form: document.querySelector('.timer'),
     text: document.querySelector('h2'),
 };
+let intervalId = null;
 refs.btn.addEventListener('click', showClicker);
 const inputValue = refs.input.value;
 function showClicker() {
+    clearInterval(intervalId);
     start();
     showDate();
     refs.text.textContent = refs.input.value;
@@ -22,8 +24,9 @@ function showClicker() {
 function start() {
     const targetValue = new Date(refs.input.value);
 
-    setInterval(() => {
+    intervalId = setInterval(() => {
         const currentTime = Date.now();
+
         const deltaTime = currentTime - targetValue;
         updateClock(deltaTime);
     }, 1000);
@@ -41,7 +44,7 @@ function updateClock(deltaTime) {
     const mins = pad(Math.floor((deltaTime % (1000 * 60 * 60)) / (1000 * 60)));
     const secs = pad(Math.floor((deltaTime % (1000 * 60)) / 1000));
 
-    refs.days.textContent = -days;
+    refs.days.textContent = -days - 1;
     refs.hours.textContent = -hours;
     refs.mins.textContent = -mins;
     refs.secs.textContent = -secs;
