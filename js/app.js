@@ -14,7 +14,9 @@ let intervalId = null;
 refs.btn.addEventListener('click', showClicker);
 const inputValue = refs.input.value;
 function showClicker() {
-    clearInterval(intervalId);
+    if (intervalId) {
+        clearInterval(intervalId);
+    }
     start();
     showDate();
     refs.text.textContent = refs.input.value;
