@@ -10,10 +10,13 @@ refs = {
     form: document.querySelector('.timer'),
     text: document.querySelector('h2'),
 };
-
+let interval = null;
 refs.btn.addEventListener('click', showClicker);
 const inputValue = refs.input.value;
 function showClicker() {
+    if (interval) {
+        clearInterval(interval);
+    }
     start();
     showDate();
     refs.text.textContent = refs.input.value;
@@ -22,7 +25,7 @@ function showClicker() {
 
 function start() {
     const targetValue = new Date(refs.input.value);
-    setInterval(() => {
+    interval = setInterval(() => {
         const currentTime = Date.now();
 
         const deltaTime = currentTime - targetValue;
