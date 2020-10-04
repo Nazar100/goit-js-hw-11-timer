@@ -3,8 +3,6 @@ refs = {
     hours: document.querySelector('span[data-value=hours]'),
     mins: document.querySelector('span[data-value=mins]'),
     secs: document.querySelector('span[data-value=secs]'),
-    startBtn: document.querySelector('.start'),
-    stopBtn: document.querySelector('.stop'),
     input: document.querySelector('input'),
     btn: document.querySelector('button'),
     form: document.querySelector('.timer'),
@@ -12,7 +10,6 @@ refs = {
 };
 let interval = null;
 refs.btn.addEventListener('click', showClicker);
-const inputValue = refs.input.value;
 function showClicker() {
     if (interval) {
         clearInterval(interval);
@@ -27,7 +24,6 @@ function start() {
     const targetValue = new Date(refs.input.value);
     interval = setInterval(() => {
         const currentTime = Date.now();
-
         const deltaTime = currentTime - targetValue;
         updateClock(deltaTime);
     }, 1000);
