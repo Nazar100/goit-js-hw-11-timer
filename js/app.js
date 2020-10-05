@@ -29,7 +29,10 @@ class CountdownTimer {
             Math.floor((deltaTime % (1000 * 60 * 60)) / (1000 * 60)),
         );
         const secs = this.pad(Math.floor((deltaTime % (1000 * 60)) / 1000));
+        this.showOnScreen(days, hours, mins, secs);
+    }
 
+    showOnScreen(days, hours, mins, secs) {
         this.refs.days.textContent = -days - 1;
         this.refs.hours.textContent = -hours;
         this.refs.mins.textContent = -mins;
