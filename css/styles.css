@@ -31,50 +31,10 @@ body {
     width: 1200px;
     color: white;
 
-    opacity: 0;
-    transition: opacity 0.4s ease-in-out;
     font-family: 'Orbitron', sans-serif;
 }
-.timer.active {
-    opacity: 1;
-}
+
 .field {
     font-size: 40px;
     margin-left: 20px;
-}
-h1 {
-    /* margin-left: 500px;
-    margin-right: auto; */
-    /* margin-left: 100px; */
-    align-self: center;
-    font-size: 40px;
-}
-.cap {
-    margin-left: auto;
-    margin-right: auto;
-    align-self: center;
-    display: inline-block;
-}
-h2 {
-    /* align-self: center; */
-    font-size: 35px;
-    margin-left: 100px;
-}
-input {
-    width: 400px;
-    height: 50px;
-    font-size: 30px;
-}
-
-button {
-    width: 83px;
-    height: 35px;
-    font-size: 20px;
-    outline: none;
-    background-color: white;
-}
-label {
-    color: white;
-    font-size: 40px;
-    font: 700;
 }

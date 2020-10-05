@@ -1,52 +1,48 @@
-refs = {
-    days: document.querySelector('span[data-value=days]'),
-    hours: document.querySelector('span[data-value=hours]'),
-    mins: document.querySelector('span[data-value=mins]'),
-    secs: document.querySelector('span[data-value=secs]'),
-    input: document.querySelector('input'),
-    btn: document.querySelector('button'),
-    form: document.querySelector('.timer'),
-    text: document.querySelector('h2'),
-};
-let interval = null;
-refs.btn.addEventListener('click', showClicker);
-function showClicker() {
-    if (interval) {
-        clearInterval(interval);
+class CountdownTimer {
+    constructor({ selector, targetDate } = {}) {
+        this.selector = selector;
+        this.targetDate = targetDate;
     }
-    start();
-    showDate();
-    refs.text.textContent = refs.input.value;
-    refs.input.value = '';
-}
 
-function start() {
-    const targetValue = new Date(refs.input.value);
-    interval = setInterval(() => {
-        const currentTime = Date.now();
-        const deltaTime = currentTime - targetValue;
-        updateClock(deltaTime);
-    }, 1000);
-}
+    refs = {
+        days: document.querySelector('span[data-value=days]'),
+        hours: document.querySelector('span[data-value=hours]'),
+        mins: document.querySelector('span[data-value=mins]'),
+        secs: document.querySelector('span[data-value=secs]'),
+    };
 
-function showDate() {
-    refs.form.classList.add('active');
-}
+    start() {
+        const targetValue = this.targetDate;
+        setInterval(() => {
+            const currentTime = Date.now();
+            const deltaTime = currentTime - targetValue;
+            this.updateClock(deltaTime);
+        }, 1000);
+    }
 
-function updateClock(deltaTime) {
-    const days = pad(Math.floor(deltaTime / (1000 * 60 * 60 * 24)));
-    const hours = pad(
-        Math.floor((deltaTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
-    );
-    const mins = pad(Math.floor((deltaTime % (1000 * 60 * 60)) / (1000 * 60)));
-    const secs = pad(Math.floor((deltaTime % (1000 * 60)) / 1000));
+    updateClock(deltaTime) {
+        const days = this.pad(Math.floor(deltaTime / (1000 * 60 * 60 * 24)));
+        const hours = this.pad(
+            Math.floor((deltaTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+        );
+        const mins = this.pad(
+            Math.floor((deltaTime % (1000 * 60 * 60)) / (1000 * 60)),
+        );
+        const secs = this.pad(Math.floor((deltaTime % (1000 * 60)) / 1000));
 
-    refs.days.textContent = -days - 1;
-    refs.hours.textContent = -hours;
-    refs.mins.textContent = -mins;
-    refs.secs.textContent = -secs;
-}
+        this.refs.days.textContent = -days - 1;
+        this.refs.hours.textContent = -hours;
+        this.refs.mins.textContent = -mins;
+        this.refs.secs.textContent = -secs;
+    }
 
-function pad(value) {
-    return String(value).padStart(2, '0');
+    pad(value) {
+        return String(value).padStart(2, '0');
+    }
 }
+const bd = new CountdownTimer({
+    selector: '#timer-1',
+    targetDate: new Date('Feb 17, 2021'),
+});
+
+bd.start();
